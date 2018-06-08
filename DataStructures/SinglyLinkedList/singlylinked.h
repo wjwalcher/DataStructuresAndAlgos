@@ -1,24 +1,23 @@
-#ifndef SINGLYLINKED_H
-#define SINGLYLINKED_H
+/*
+** Author: William Walcher
+** Date: June 2018
+** Implementation of a singly linked list
+** using both a head and tail pointer 
+** O(1) front and back insertions
+** O(1) front removal, O(n) back removal
+** O(n) find, O(n) removal at specified index
+*/
 
-class singlylinked {
-
-    struct Node {
-        int data;
-        Node* next;
-    };
-
-    public:
-        void insert(int pos, int data);
-        void insertFront(int data);
-        void insertBack(int data);
-        void remove(int data);
-        void removeFront();
-        void removeBack();
-    private:
-        int length;
-        Node* head;
-        Node* tail;
+struct Node {
+   int data;
+   Node* next;
 };
 
-#endif
+   
+void insert(int pos, int data);
+void insertFront(int data);
+void insertBack(int data);
+void remove(int data);
+void removeFront();
+void removeBack();
+int size();
