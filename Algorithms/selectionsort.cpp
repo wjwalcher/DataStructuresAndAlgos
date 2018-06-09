@@ -5,11 +5,12 @@
 ** Search for smallest value in array, swap with smallest index of unsorted part.
 ** Worst case: O(n^2) Best case: O(n^2) Average case: O(n^2)
 */
+#include <iostream>
 
 int array[10] = {2, 4, 55, 11, 40, 8, 7, 10, 83, 100};
 
 void selectionsort(int arr[], int startIndex, int length) {
-    int smallest = 0;
+    int smallest = startIndex;
     for (int i = startIndex;i < length; i++) {
         if (arr[smallest] > arr[i]) {
             smallest = i;
@@ -19,18 +20,18 @@ void selectionsort(int arr[], int startIndex, int length) {
     arr[startIndex] = arr[smallest];
     arr[smallest] = temp;
     if (startIndex+1 < length) {
-        selectionSort(arr, startIndex+1, length);
+        selectionsort(arr, startIndex+1, length);
     }
 }
 
 int main() {
-    cout << "Unsorted:" << endl;
+    std::cout << "Unsorted:" << std::endl;
     for (int i = 0; i < 10;i++) {
-        cout << array[i] << endl;
+        std::cout << array[i] << std::endl;
     }
     selectionsort(array, 0, 10);
-    cout << "Sorted:" << endl;
+    std::cout << "Sorted:" << std::endl;
     for (int i = 0; i < 10;i++) {
-        cout << array[i] << endl;
+        std::cout << array[i] << std::endl;
     }
 }
