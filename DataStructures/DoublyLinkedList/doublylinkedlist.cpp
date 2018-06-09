@@ -8,6 +8,9 @@
 */ 
 
 #include "doublylinkedlist.h"
+#include <iostream>
+
+using namespace std;
 
 Node* head = NULL;
 Node* tail = NULL;
@@ -21,7 +24,6 @@ void insertFront(int data) {
         tail = newNode;
         head->prev = NULL;
         tail->next = NULL;
-        length++;
     } else {
         Node* temp = head;
         head->prev = newNode;
@@ -29,6 +31,7 @@ void insertFront(int data) {
         head->next = temp;
         head->prev = NULL;
     }
+    length++;
 }
 
 void insertBack(int data) {
@@ -39,15 +42,21 @@ void insertBack(int data) {
         head = newNode;
         head->prev = NULL;
         tail->next = NULL;
-        length++;
+        
+    } else {
+        Node* prev = tail;
+        tail->next = newNode;
+        tail = newNode;
+        tail->prev = prev;
+        tail->next = NULL;
     }
+    length++;
 }
 
 void removeFront() {
     if (length == 1) {
         delete head;
         delete tail;
-        length--;
         head = NULL;
         tail = NULL;
     } else {
@@ -57,13 +66,13 @@ void removeFront() {
         temp->next = NULL;
         delete temp;
     }
+    length--;
 }
 
 void removeBack() {
      if (length == 1) {
         delete head;
         delete tail;
-        length--;
         head = NULL;
         tail = NULL;
     } else {
@@ -72,5 +81,21 @@ void removeBack() {
         tail->next = NULL;
         delete temp;
     }
+    length--;
 }
 
+int main() {
+    //Testing here
+    insertFront(25);
+    insertFront(50);
+    insertBack(66);
+    insertFront(100);
+    removeBack();
+    insertFront(90);
+    insertBack(11);
+    Node* cur = head;
+    while (cur != NULL) {
+        cout << cur->data << endl;
+        cur = cur->next;
+    }
+}
