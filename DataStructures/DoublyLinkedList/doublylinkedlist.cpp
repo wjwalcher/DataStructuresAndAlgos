@@ -21,7 +21,6 @@ void insertFront(int data) {
         tail = newNode;
         head->prev = NULL;
         tail->next = NULL;
-        length++;
     } else {
         Node* temp = head;
         head->prev = newNode;
@@ -29,6 +28,7 @@ void insertFront(int data) {
         head->next = temp;
         head->prev = NULL;
     }
+    length++;
 }
 
 void insertBack(int data) {
@@ -44,33 +44,37 @@ void insertBack(int data) {
 }
 
 void removeFront() {
-    if (length == 1) {
-        delete head;
-        delete tail;
+    if (!(length <= 0)) {
+        if (length == 1) {
+            delete head;
+            delete tail;
+            head = NULL;
+            tail = NULL;
+        } else {
+            Node* temp = head;
+            head = head->next; 
+            head->prev = NULL;
+            temp->next = NULL;
+            delete temp;
+        }
         length--;
-        head = NULL;
-        tail = NULL;
-    } else {
-        Node* temp = head;
-        head = head->next; 
-        head->prev = NULL;
-        temp->next = NULL;
-        delete temp;
     }
 }
 
 void removeBack() {
-     if (length == 1) {
-        delete head;
-        delete tail;
+    if (!(length <= 0)) {
+        if (length == 1) {
+            delete head;
+            delete tail;
+            head = NULL;
+            tail = NULL;
+        } else {
+            Node* temp = tail;
+            tail = tail->prev;
+            tail->next = NULL;
+            delete temp;
+        }
         length--;
-        head = NULL;
-        tail = NULL;
-    } else {
-        Node* temp = tail;
-        tail = tail->prev;
-        tail->next = NULL;
-        delete temp;
     }
 }
 
