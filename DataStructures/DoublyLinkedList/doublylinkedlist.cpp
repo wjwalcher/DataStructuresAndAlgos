@@ -8,6 +8,9 @@
 */ 
 
 #include "doublylinkedlist.h"
+#include <iostream>
+
+using namespace std;
 
 Node* head = NULL;
 Node* tail = NULL;
@@ -39,26 +42,31 @@ void insertBack(int data) {
         head = newNode;
         head->prev = NULL;
         tail->next = NULL;
-        length++;
+        
+    } else {
+        Node* prev = tail;
+        tail->next = newNode;
+        tail = newNode;
+        tail->prev = prev;
+        tail->next = NULL;
     }
+    length++;
 }
 
 void removeFront() {
-    if (!(length <= 0)) {
-        if (length == 1) {
-            delete head;
-            delete tail;
-            head = NULL;
-            tail = NULL;
-        } else {
-            Node* temp = head;
-            head = head->next; 
-            head->prev = NULL;
-            temp->next = NULL;
-            delete temp;
-        }
-        length--;
+    if (length == 1) {
+        delete head;
+        delete tail;
+        head = NULL;
+        tail = NULL;
+    } else {
+        Node* temp = head;
+        head = head->next; 
+        head->prev = NULL;
+        temp->next = NULL;
+        delete temp;
     }
+    length--;
 }
 
 void removeBack() {
@@ -78,3 +86,18 @@ void removeBack() {
     }
 }
 
+int main() {
+    //Testing here
+    insertFront(25);
+    insertFront(50);
+    insertBack(66);
+    insertFront(100);
+    removeBack();
+    insertFront(90);
+    insertBack(11);
+    Node* cur = head;
+    while (cur != NULL) {
+        cout << cur->data << endl;
+        cur = cur->next;
+    }
+}
